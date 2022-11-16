@@ -1,512 +1,155 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <!--[ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7]--[en]--[]-->
-  <meta charset="utf-8">
-  <title>Feed43 : Edit Feed</title>
-  <meta name="MSSmartTagsPreventParsing" content="TRUE">
-  <meta http-equiv="imagetoolbar" content="no">
-  <meta name="viewport" content="initial-scale=0.5" />
-  <meta name="Keywords" content="convert html to rss,rss feed generator,rss feed scraper,feed generator,html scrape,html scraper,web scrape,web scraper,rss scraping,feed for free,feed4free,feed43,page2rss,syndirella,feedfire,feedyes,ponyfish,feedrinse">
-  <link rel="stylesheet" type="text/css" href="/res/style.css?v1.5.2018012703">
-  <script type="text/javascript" src="/res/libXmlRequest.js"></script>
-  <script type="text/javascript" src="/res/prototypes.js"></script>
-  <script type="text/javascript" src="/res/engine.js?v1.5.2018012703"></script>
-  <script language="JavaScript">
-    action_url = 'feed.html';
-    default_params.push('name', 'auth');
-  </script>
-
-  <script type="text/javascript">
-    function setCookie(name, value, days) {
-      var expires;
-      if (days) {
-        var date = new Date();
-        date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
-        expires = '; expires=' + date.toGMTString();
-      } else {
-        expires = '';
-      }
-      document.cookie = name + '=' + value + expires + '; path=/';
-    }
-
-    function setLanguage(lang) {
-      setCookie('lang', lang, lang === '' ? -1 : 2 * 365);
-      window.location.reload();
-    }
-
-    function logout() {
-      setCookie('user_auth', '', -1);
-      window.location.href = window.location.href;
-    }
-  </script>
-</head>
-<body class="feed">
-<div class="body">
-
-<div class="header">
-  <table class="main">
-    <tr>
-      <td width="240"><a href="/" class="logo">Feed<span>43</span></a></td>
-      <td width="100%" class="menu">
-      <!-- menu -->
-      <span class="bullet">&raquo;&nbsp;</span><a href="/">Home</a>
-      <span class="bullet">&raquo;&nbsp;</span><a href="/upgrade.html">Pricing</a>
-      <span class="bullet">&raquo;&nbsp;</span><a href="/help.html">Help</a>
-      <span class="bullet">&raquo;&nbsp;</span><a href="/feedback.html">Contact</a>
-        <div>
-          
-          
-          Anonymous user
-          <span class="bullet">&raquo;&nbsp;</span><a href="/users/" class="bold">My feeds</a>
-          
-          <span class="bullet">&raquo;&nbsp;</span><a href="/users.html?action=new">Create account</a>
-          
-          
-        </div>
-      <!-- /menu -->
-    </td>
-    </tr>
-  </table>
-  <div class="main page-heading">
-    <h1>Editing feed: <span id="title">시그널빌드 - 펀한 드라이빙에 시작점</span>
-</h1>
-  </div>
-</div>
-
-
-
-
-<div class="main">
-  <input id="name" type="hidden" value="6856415357737112">
-  <input id="auth" type="hidden" value="">
-
-  <p>Edit your feed. Required fields are marked with asterisk (<span class="bullet">*</span>).</p>
-  <p>Click <a class="help" title="Open help in separate window" href="javascript:help('index')">?</a> next to each parameter for help.</p>
-
-  <!-- ---------------------------- -->
-
-  <h2 style="margin-bottom: 0;">Step 1. Specify source page address (URL)</h2>
-
-  <form method="post" onsubmit="doAction('get'); return false;">
-    <table class="w100">
-      <tr>
-        <td class="w100" style="vertical-align: bottom">
-          <p>
-            Address<span class="bullet">*</span>: <span class="small">(<a title="Open typed address in new window" href="javascript:openInBrowser();">Open in browser</a>) <a class="small help" title="Help on this option" href="javascript:help('url')">?</a></span><br/>
-            <input id="url" style="width:490px" size="64" class="text" maxlength="2048" value="https://signalbuild.netlify.app/">
-          </p>
-        </td>
-        <td style="padding-left: 10px; vertical-align: bottom">
-          <p>
-            Encoding: <a class="small help" title="Help on this option" href="javascript:help('encoding')">?</a><br/>
-            <input id="encoding" class="text" style="width:150px" size="20" maxlength="32" value="UTF-8"></span>
-          </p>
-        </td>
-      </tr>
-    </table>
-
-    <table class="w100">
-      <tr>
-        <td class="w100" style="padding-right: 20px"><span id="get_status" class="status">Click [Reload] button to save above settings and go to next step</span></td>
-        <td><input class="button" type="submit" value="Reload"></td>
-      </tr>
-    </table>
-  </form>
-</div>
-
-<div id="step2" class="hidden">
-
-  <p>Below is the HTML source of the retrieved page. Use it to setup extraction rules (see next step).</p>
-
-  <p class="nobr">Page Source: <a class="small help" title="Help on this option" href="javascript:help('page_source')">?</a></p>
-  <table>
-    <tr valign="top">
-      <td class="w100"><div id="raw_data" class="textarea">Click [Reload] to see contents</div></td>
-      <td style="padding-left:5px">
-        <div class="small" style="text-align:center;line-height:14pt">
-          <a title="Decrease area height" href="javascript:resize_height('raw_data',-100)">(&ndash;)</a><br/>
-          <a title="Increase area height" href="javascript:resize_height('raw_data',100)">(+)</a>
-        </div>
-      </td>
-    </tr>
-  </table>
-
-  <!-- ---------------------------- -->
-
-  <h2>Step 2. Define extraction rules</h2>
-
-  <form method="post" onsubmit="doAction('search'); return false;">
-    <p class="nobr"><a href="javascript:toggle('global_search_pattern')"><span id="global_search_pattern_toggle" class="toggle"></span>Global Search Pattern (optional):</a> <a class="small help" title="Help on this option" href="javascript:help('global_pattern')">?</a></p>
-    <table id="global_search_pattern" class="hidden">
-      <tr valign="top">
-        <td class="w100"><textarea id="global_pattern" cols="40" rows="4" wrap="soft"></textarea></td>
-        <td style="padding-left:5px">
-          <div class="small" style="text-align:center;line-height:14pt">
-            <a title="Decrease area height" href="javascript:resize_height('global_pattern',-40)">(&ndash;)</a><br/>
-            <a title="Increase area height" href="javascript:resize_height('global_pattern',40)">(+)</a>
-          </div>
-        </td>
-      </tr>
-    </table>
-
-    <p class="nobr" style="margin-top: 20px;">Item (repeatable) Search Pattern<span class="bullet">*</span>: <a class="small help" title="Help on this option" href="javascript:help('item_pattern')">?</a></p>
-    <table>
-      <tr valign="top">
-        <td class="w100"><textarea id="item_pattern" cols="40" rows="4" wrap="soft">{*}&lt;li&gt;{*}&lt;a href=&quot;{&#37;}&quot;&gt;{&#37;}&lt;{*}</textarea></td>
-        <td style="padding-left:5px">
-          <div class="small" style="text-align:center;line-height:14pt">
-            <a title="Decrease area height" href="javascript:resize_height('item_pattern',-40)">(&ndash;)</a><br/>
-            <a title="Increase area height" href="javascript:resize_height('item_pattern',40)">(+)</a>
-          </div>
-        </td>
-      </tr>
-    </table>
-
-    
-
-    <p>
-      <table class="w100">
-        <tr>
-          <td class="w100" style="padding-right: 20px"><span id="search_status" class="status">Click [Extract] button to save above settings and go to next step</span></td>
-          <td><input class="button" type="submit" value="Extract"></td>
-        </tr>
-      </table>
-    </p>
-  </form>
-
-  
-  <div id="patterns-insight" class="insight">
-    <p>Do you need extra help in setting up your feed? <a target="_blank" href="/feedback.html?subject=I+need+help+setting+up+my+feed&text=Source+web+page:+\n\n\nI+need+to+extract+from+this+page:+\n\n\nAdditional+comments:+\n">Contact us</a>, and we'll see if what you're trying to achieve is possible. We will set up one feed for you with the purchase of any <a target="_blank" href="/upgrade.html">paid subscription</a>.</p>
-
-    <p><strong>Business users:</strong> you can get a 1-hour consultation on setting up the feeds with the purchase of any <a target="_blank" href="/upgrade.html#business">business plan</a>.</p>
-  </div>
-  
-
-<div id="step3" class="hidden" style="margin-top: 30px;">
-
-  <!-- ---------------------------- -->
-
-  <p>Below is list of extracted text snippets (<span class="param">{%N}</span>). You can reference them when setting up item properties (see next step).</p>
-
-  <p class="nobr">Clipped Data: <a class="small help" title="Help on this option" href="javascript:help('clipped_data')">?</a></p>
-  <table>
-    <tr valign="top">
-      <td class="w100"><div id="clipped_data" class="textarea">Click [Extract] to see contents</div></td>
-      <td style="padding-left:5px">
-        <div class="small" style="text-align:center;line-height:14pt">
-          <a title="Decrease area height" href="javascript:resize_height('clipped_data',-100)">(&ndash;)</a><br/>
-          <a title="Increase area height" href="javascript:resize_height('clipped_data',100)">(+)</a>
-        </div>
-      </td>
-    </tr>
-  </table>
-
-  <h2>Step 3. Define output format</h2>
-
-  <form method="post" onsubmit="doAction('build'); return false;">
-    <h3>RSS feed properties</h3>
-
-    <p>These are global feed properties that won't change over time. Some feed readers may show them to the user when subscribing to the feed.</p>
-
-    <p>
-      Feed Title<span class="bullet">*</span>: <a class="small help" title="Help on this option" href="javascript:help('feed_title')">?</a><br/>
-      <input id="feed_title" class="text" size="64" maxlength="150" value="시그널빌드 - 펀한 드라이빙에 시작점" onkeyup="updateTitle()" onchange="updateTitle()">
-    </p>
-
-    <p>
-      Feed Link<span class="bullet">*</span>: <a class="small help" title="Help on this option" href="javascript:help('feed_link')">?</a><br/>
-      <input id="feed_link" class="text" size="64" maxlength="2048" value="https://signalbuild.netlify.app/">
-    </p>
-
-    <p>
-      Feed Description<span class="bullet">*</span>: <a class="small help" title="Help on this option" href="javascript:help('feed_description')">?</a><br/>
-      <textarea id="feed_description" cols="40" rows="3" wrap="soft">시그널빌드 - 펀한 드라이빙에 시작점</textarea>
-    </p>
-
-    <h3>RSS item properties</h3>
-
-    <p>Fields below can accept previously extracted parameters (<span class="param">{%1}</span>, <span class="param">{%2}</span> and so on).</p>
-
-    <p>
-      Item Title Template<span class="bullet">*</span>: <a class="small help" title="Help on this option" href="javascript:help('item_title')">?</a><br/>
-      <input id="item_title" class="text" size="64" maxlength="150" value="편한 드라이빙에 시작점 시그널빌드입니다.">
-    </p>
-
-    <p>
-      Item Link Template<span class="bullet">*</span>: <a class="small help" title="Help on this option" href="javascript:help('item_link')">?</a><br/>
-      <input id="item_link" class="text" size="64" maxlength="2048" value="https://signalbuild.netlify.app">
-    </p>
-
-    <p class="nobr">Item Content Template<span class="bullet">*</span>: <a class="small help" title="Help on this option" href="javascript:help('item_template')">?</a></p>
-    <table>
-      <tr valign="top">
-        <td class="w100"><textarea id="item_template" cols="40" rows="4" wrap="soft">편한 드라이빙에 시작점 시그널빌드입니다.</textarea></td>
-        <td style="padding-left:5px">
-          <div class="small" style="text-align:center;line-height:14pt">
-            <a title="Decrease area height" href="javascript:resize_height('item_template',-40)">(&ndash;)</a><br/>
-            <a title="Increase area height" href="javascript:resize_height('item_template',40)">(+)</a>
-          </div>
-        </td>
-      </tr>
-    </table>
-
-    <p><a href="javascript:toggle('optional_parameters')"><span id="optional_parameters_toggle" class="toggle"></span>Optional parameters</a></p>
-    <div id="optional_parameters" class="hidden">
-      <p class="nobr"><input id="merge_items" type="checkbox" value="1"><label for="merge_items">Merge all items into single one, optionally applying global template:</label> <a class="small help" title="Help on this option" href="javascript:help('global_template')">?</a></p>
-      <table>
-        <tr valign="top">
-          <td class="w100"><textarea id="global_template" cols="40" rows="2" wrap="soft"></textarea></td>
-          <td style="padding-left:5px">
-            <div class="small" style="text-align:center;line-height:14pt">
-              <a title="Decrease area height" href="javascript:resize_height('global_template',-40)">(&ndash;)</a><br/>
-              <a title="Increase area height" href="javascript:resize_height('global_template',40)">(+)</a>
-            </div>
-          </td>
-        </tr>
-      </table>
-    </div>
-
-    <p>
-      <table class="w100">
-        <tr>
-          <td class="w100" style="padding-right: 20px"><span id="build_status" class="status">Click [Preview] button to save above settings and show sample view of your feed</span></td>
-          <td><input class="button" type="submit" value="Preview"></td>
-        </tr>
-      </table>
-    </p>
-  </form>
-
-<div id="step4" class="hidden">
-
-  <!-- ---------------------------- -->
-
-  <p>Here is how your feed will look like in feed reader. Go to next step to get the link to your feed.</p>
-
-  <p class="nobr">Feed Preview: <a class="small help" title="Help on this option" href="javascript:help('preview')">?</a></p>
-  <table>
-    <tr valign="top">
-      <td class="w100"><div id="preview" class="textarea">Click [Preview] to see contents</div></td>
-      <td style="padding-left:5px">
-        <div class="small" style="text-align:center;line-height:14pt">
-          <a title="Decrease area height" href="javascript:resize_height('preview',-100)">(&ndash;)</a><br/>
-          <a title="Increase area height" href="javascript:resize_height('preview',100)">(+)</a>
-        </div>
-      </td>
-    </tr>
-  </table>
-
-  <h2>Your feed is ready!</h2>
-
-  <p style="margin-top:30px">
-    <span class="big">Feed URL: <a title="Click to open this URL in new window" id="feed-link" target="_blank" href="http://feed43.com/6856415357737112.xml"><span class="feed-icon"></span> http://feed43.com/6856415357737112.xml</a></span>
-	<a class="small help" title="Help on this option" href="javascript:help('feed_url')">?</a>
-  </p>
-
-  <p>Point your feed reader to this URL or click to open it.</p>
-
-  
-  <p style="margin-top:30px">
-    <span class="big">Edit URL: <a id="edit-link" href="http://feed43.com/feed.html?name=6856415357737112">http://feed43.com/feed.html?name=6856415357737112</a></span>
-    <a class="small help" title="Help on this option" href="javascript:help('edit_url')">?</a>
-  </p>
-
-  <p>Please save this link for future use.</p>
-  
-
-  <h3 style="margin-top:30px">Optional features</h3>
-
-  <p>
-    <a title="Click to show/hide the form" href="javascript:toggle('rename_form');"><span id="rename_form_toggle" class="toggle"></span>Change file name</a>
-    of this feed to make it more user-friendly <a class="small help" title="Help on this option" href="javascript:help('rename')">?</a>
-  </p>
-
-  <div id="rename_form" class="popup hidden" style="width:401px">
-    <form onsubmit="doAction('rename'); return false;">
-      <table>
-        <tr>
-          <td>Name:</td>
-          <td class="w100" style="padding-left:5px"><input id="rename" class="text" size="30" maxlength="30" value="6856415357737112"></td>
-          <td style="padding-left:10px"><input class="button" type="submit" value="Rename"></td>
-        </tr>
-      </table>
-    </form>
-    <p class="small" style="margin-top:10px; margin-bottom:0px;"><span id="rename_status" class="status">Only a-z, 0-9, underscore and hyphen symbols are allowed.</span></p>
-  </div>
-
-  <div id="link_feature" class="">
-    <p>
-      <a title="Click to show/hide the form" href="javascript:toggle('link_account_form');"><span id="link_account_form_toggle" class="toggle"></span><b>Add this feed to my account</b></a>
-      <a class="small help" title="Help on this option" href="javascript:help('link_account')">?</a>
-    </p>
-
-    
-    
-      <div id="link_account_form" class="popup hidden" style="width:400px">
-        <form onsubmit="doAction('link_account'); return false;">
-          <table>
-            <tr>
-              <td><nobr>User Name<span class="bullet">*</span>:</nobr></td>
-              <td class="w100" style="padding-left:5px"><input id="link_user_name" class="text" size="30" maxlength="30" value=""></td>
-              <td>&nbsp;</td>
-            </tr>
-            <tr><td colspan="2" style="height:10px"></td></tr>
-            <tr>
-              <td>Password<span class="bullet">*</span>:</td>
-              <td class="w100" style="padding-left:5px"><input id="link_user_pwd" class="text" type="password" size="30" maxlength="256"></td>
-              <td style="padding-left:10px"><input class="button" type="submit" value="Add"></td>
-            </tr>
-          </table>
-        </form>
-        <p class="small" style="margin-top:10px; margin-bottom:0px;"><span id="link_account_status" class="status">You can specify your e-mail to be able to restore password later.</span></p>
-      </div>
-    
-  </div>
-
-  <div id="protect_feature" class="">
-    <p>
-      <a title="Click to show/hide the form" href="javascript:toggle('protect_edit_form');"><span id="protect_edit_form_toggle" class="toggle"></span><b>Protect feed from being edited</b></a>
-      <a class="small help" title="Help on this option" href="javascript:help('protect_edit')">?</a>
-    </p>
-
-    <div id="protect_edit_form" class="popup hidden" style="width:400px">
-      <form onsubmit="doAction('protect_edit'); return false;">
-        <table>
-          <tr>
-            <td>Password<span class="bullet">*</span>:</td>
-            <td class="w100" style="padding-left:5px"><input id="edit_password" class="text fakepwd" onfocus="if (this.className != 'text') {this.className = 'text'; this.value = ''}" type="password" size="30" maxlength="16" value=""></td>
-            <td>&nbsp;</td>
-          </tr>
-          <tr><td colspan="2" style="height:10px"></td></tr>
-          <tr>
-            <td><nobr>E-mail:</nobr></td>
-            <td class="w100" style="padding-left:5px"><input id="email" class="text" size="30" maxlength="64" value=""></td>
-            <td style="padding-left:10px"><input class="button" type="submit" value="Set"></td>
-          </tr>
-        </table>
-      </form>
-      <p class="small" style="margin-top:10px; margin-bottom:0px;"><span id="protect_edit_status" class="status">You can specify your e-mail to be able to restore password later.</span></p>
-    </div>
-  </div>
-
-  <div id="change_feature" class="hidden">
-    <p>
-      <a title="Click to show/hide the form" href="javascript:toggle('change_protect_form');"><span id="change_protect_form_toggle" class="toggle"></span>Change feed edit password</a>
-      <a class="small help" title="Help on this option" href="javascript:help('change_protect')">?</a>
-    </p>
-
-    <div id="change_protect_form" class="popup hidden" style="width:400px">
-      <form onsubmit="doAction('change_protect'); return false;">
-        <table>
-          <tr>
-            <td>Password<span class="bullet">*</span>:</td>
-            <td class="w100" style="padding-left:5px"><input id="change_password" class="text fakepwd" onfocus="if (this.className != 'text') {this.className = 'text'; this.value = ''}" type="password" size="30" maxlength="16" value="#*$*#*$*#"></td>
-            <td style="padding-left:10px"><input class="button" type="submit" value="Set"></td>
-          </tr>
-        </table>
-      </form>
-      <p class="small" style="margin-top:10px; margin-bottom:0px;"><span id="change_protect_status" class="status">Please provide a new password (or blank password to remove protection).</span></p>
-    </div>
-  </div>
-
-  <!-- - -->
-
-  <p>
-    <a title="Click to show/hide the form" href="javascript:toggle('protect_view_form');"><span id="protect_view_form_toggle" class="toggle"></span>Make this feed private</a>
-    <a class="small help" title="Help on this option" href="javascript:help('protect_view')">?</a>
-  </p>
-
-  <div id="protect_view_form" class="popup hidden" style="width:400px">
-    <form onsubmit="doAction('protect_view'); return false;">
-      <table>
-        <tr>
-          <td><nobr>User Name:</nobr></td>
-          <td class="w100" style="padding-left:5px"><input id="view_username" class="text" size="30" maxlength="16" value=""></td>
-          <td>&nbsp;</td>
-        </tr>
-        <tr><td colspan="2" style="height:10px"></td></tr>
-        <tr>
-          <td>Password:</td>
-          <td class="w100" style="padding-left:5px"><input id="view_password" class="text fakepwd" onfocus="if (this.className != 'text') {this.className = 'text'; this.value = ''}" type="password" size="30" maxlength="16" value=""></td>
-          <td style="padding-left:10px"><input class="button" type="submit" value="Set"></td>
-        </tr>
-      </table>
-    </form>
-    <p class="small" style="margin-top:10px; margin-bottom:0px;"><span id="protect_view_status" class="status">Provide user name and password.</span></p>
-  </div>
-
-  <!-- - -->
-
-  <div id="email_feature" class="">
-    <p>
-      <a title="Click to show/hide the form" href="javascript:toggle('email_form');"><span id="email_form_toggle" class="toggle"></span>Send me summary e-mail</a> with feed name, URL, etc.
-      <a class="small help" title="Help on this option" href="javascript:help('email')">?</a>
-    </p>
-
-    <div id="email_form" class="popup hidden" style="width:400px">
-      <form onsubmit="doAction('email'); return false;">
-        <table>
-          <tr>
-            <td><nobr>E-mail:</nobr></td>
-            <td class="w100" style="padding-left:5px"><input id="remind_email" class="text" size="30" maxlength="64" value=""></td>
-            <td style="padding-left:10px"><input class="button" type="submit" value="Send"></td>
-          </tr>
-        </table>
-      </form>
-      <p class="small" style="margin-top:10px; margin-bottom:0px;"><span id="email_status" class="status">Please enter your e-mail address.</span></p>
-    </div>
-  </div>
-
-  <h2>What to do next?</h2>
-
-  <p class="big"><img src="/res/inoreader_icon.png" width="16" height="16" style="margin-right: 10px; position: relative; top: 2px;"/><a id="inoreader-link" href="https://www.inoreader.com/?from=feed43&add_feed=http://feed43.com/6856415357737112.xml">Subscribe to this feed in Inoreader</a></p>
-  <p style="margin-left: 26px;">Inoreader is a great online reader that will keep the full news archive for this feed, and can alert you by email when the feed is updated.</p>
-
-  <div style="padding-top:30px"><a class="cta" href="feed.html?action=new">Create another feed</a></div>
-
-</div><!-- /step4 -->
-</div><!-- /step3 -->
-</div><!-- /step2 -->
-
-  <div id="show_all"><p class="small" style="margin-top:30px;"><a title="Show entire form at once" href="javascript:showAll()">See all parameters at once</a> <a class="small help" title="Help on this option" href="javascript:help('advanced_mode')">?</a></p></div>
-
-</div>
-
-</form>
-
-<script>
-
-var autoloadURL = sessionStorage.autoloadURL || '';
-delete sessionStorage.autoloadURL;
-
-
-
-</script>
-
-
-
-
-<div class="main footer">
-  <div id="language">Language:
-    <select id="language_selector" onchange="setLanguage(this.value)">
-      <option value="">Auto-detect</option>
-      <option value="en" selected>English</option>
-      <option value="ru">Русский</option>
-    </select>
-  </div>
-  Feed43 v. 1.5. Copyright &copy; 2006&ndash;2022 Plan43. All rights reserved.
-  <a href="/tos.html">Terms of Service</a>
-</div>
-
-</div>
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-83733021-1', 'auto');
-  ga('send', 'pageview');
-</script>
-</body>
-</html>
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/res/preview.xsl"?>
+<rss version="2.0">
+  <channel>
+    <title>시그널빌드 - 펀한 드라이빙에 시작점</title>
+    <link>https://signalbuild.netlify.app/</link>
+    <description><![CDATA[시그널빌드 - 펀한 드라이빙에 시작점]]></description>
+    <lastBuildDate>Wed, 16 Nov 2022 07:10:23 GMT</lastBuildDate>
+    <generator>Feed43 Proxy/1.0 (www.feed43.com)</generator>
+    <ttl>360</ttl>
+
+<item>
+<guid isPermaLink="false">2d19ba17773656d78a7048c05e0b2c3e</guid>
+<pubDate>Wed, 16 Nov 2022 07:10:23 GMT</pubDate>
+<link>https://signalbuild.netlify.app/index.html</link>
+<description><![CDATA[<p><sub><i>-- Delivered by <a href="http://feed43.com/">Feed43</a> service</i></sub></p>
+]]></description>
+</item>
+<item>
+<guid isPermaLink="false">73ed9a1eb3a3c56a381f517f9dc548b0</guid>
+<pubDate>Wed, 16 Nov 2022 07:10:22 GMT</pubDate>
+<link>javascript:void(0)</link>
+<description><![CDATA[<p><sub><i>-- Delivered by <a href="http://feed43.com/">Feed43</a> service</i></sub></p>
+]]></description>
+</item>
+<item>
+<guid isPermaLink="false">2d19ba17773656d78a7048c05e0b2c3e</guid>
+<pubDate>Wed, 16 Nov 2022 07:10:21 GMT</pubDate>
+<link>https://signalbuild.netlify.app/index.html</link>
+<description><![CDATA[<p><sub><i>-- Delivered by <a href="http://feed43.com/">Feed43</a> service</i></sub></p>
+]]></description>
+</item>
+<item>
+<guid isPermaLink="false">73ed9a1eb3a3c56a381f517f9dc548b0</guid>
+<pubDate>Wed, 16 Nov 2022 07:10:20 GMT</pubDate>
+<link>javascript:void(0)</link>
+<description><![CDATA[<p><sub><i>-- Delivered by <a href="http://feed43.com/">Feed43</a> service</i></sub></p>
+]]></description>
+</item>
+<item>
+<guid isPermaLink="false">ac98e1a15d10f303de1b9f58671bfc65</guid>
+<pubDate>Wed, 16 Nov 2022 07:10:19 GMT</pubDate>
+<link>https://signalbuild.netlify.app/about-us.html</link>
+<description><![CDATA[<p><sub><i>-- Delivered by <a href="http://feed43.com/">Feed43</a> service</i></sub></p>
+]]></description>
+</item>
+<item>
+<guid isPermaLink="false">f6cdac98c3cf3716957a4061934a505e</guid>
+<pubDate>Wed, 16 Nov 2022 07:10:18 GMT</pubDate>
+<link>https://signalbuild.netlify.app/our-services.html</link>
+<description><![CDATA[<p><sub><i>-- Delivered by <a href="http://feed43.com/">Feed43</a> service</i></sub></p>
+]]></description>
+</item>
+<item>
+<guid isPermaLink="false">0230818ac7bf70254982c8f65f8539b9</guid>
+<pubDate>Wed, 16 Nov 2022 07:10:17 GMT</pubDate>
+<link>https://signalbuild.netlify.app/clients-1.html</link>
+<description><![CDATA[<p><sub><i>-- Delivered by <a href="http://feed43.com/">Feed43</a> service</i></sub></p>
+]]></description>
+</item>
+<item>
+<guid isPermaLink="false">70ef9dc9b0ad4aa1be1f5853565f986d</guid>
+<pubDate>Wed, 16 Nov 2022 07:10:16 GMT</pubDate>
+<link>https://signalbuild.netlify.app/masonry-2-columns.html</link>
+<description><![CDATA[<p><sub><i>-- Delivered by <a href="http://feed43.com/">Feed43</a> service</i></sub></p>
+]]></description>
+</item>
+<item>
+<guid isPermaLink="false">4c85721202a1ebcede478dcf2de3d916</guid>
+<pubDate>Wed, 16 Nov 2022 07:10:15 GMT</pubDate>
+<link>https://www.instagram.com/signal_build/</link>
+<description><![CDATA[<p><sub><i>-- Delivered by <a href="http://feed43.com/">Feed43</a> service</i></sub></p>
+]]></description>
+</item>
+<item>
+<guid isPermaLink="false">5a1f3fb48b491c8a313f8652f47201e3</guid>
+<pubDate>Wed, 16 Nov 2022 07:10:14 GMT</pubDate>
+<link>https://signalbuild.netlify.app/contact-us.html</link>
+<description><![CDATA[<p><sub><i>-- Delivered by <a href="http://feed43.com/">Feed43</a> service</i></sub></p>
+]]></description>
+</item>
+<item>
+<guid isPermaLink="false">3d4c4e7255c6fdec500a10ee88ed4942</guid>
+<pubDate>Wed, 16 Nov 2022 07:10:13 GMT</pubDate>
+<link>https://signalbuild.netlify.app/portfolio-details.html&#37;22&#37;20class=&#37;22iq-portfolio-img</link>
+<description><![CDATA[<p><sub><i>-- Delivered by <a href="http://feed43.com/">Feed43</a> service</i></sub></p>
+]]></description>
+</item>
+<item>
+<guid isPermaLink="false">15ee3e3d65357f88b033c1167b9e9e6c</guid>
+<pubDate>Wed, 16 Nov 2022 07:10:12 GMT</pubDate>
+<link>https://signalbuild.netlify.app/portfolio-details.html</link>
+<description><![CDATA[<p><sub><i>-- Delivered by <a href="http://feed43.com/">Feed43</a> service</i></sub></p>
+]]></description>
+</item>
+<item>
+<guid isPermaLink="false">3d4c4e7255c6fdec500a10ee88ed4942</guid>
+<pubDate>Wed, 16 Nov 2022 07:10:11 GMT</pubDate>
+<link>https://signalbuild.netlify.app/portfolio-details.html&#37;22&#37;20class=&#37;22iq-portfolio-img</link>
+<description><![CDATA[<p><sub><i>-- Delivered by <a href="http://feed43.com/">Feed43</a> service</i></sub></p>
+]]></description>
+</item>
+<item>
+<guid isPermaLink="false">15ee3e3d65357f88b033c1167b9e9e6c</guid>
+<pubDate>Wed, 16 Nov 2022 07:10:10 GMT</pubDate>
+<link>https://signalbuild.netlify.app/portfolio-details.html</link>
+<description><![CDATA[<p><sub><i>-- Delivered by <a href="http://feed43.com/">Feed43</a> service</i></sub></p>
+]]></description>
+</item>
+<item>
+<guid isPermaLink="false">3d4c4e7255c6fdec500a10ee88ed4942</guid>
+<pubDate>Wed, 16 Nov 2022 07:10:09 GMT</pubDate>
+<link>https://signalbuild.netlify.app/portfolio-details.html&#37;22&#37;20class=&#37;22iq-portfolio-img</link>
+<description><![CDATA[<p><sub><i>-- Delivered by <a href="http://feed43.com/">Feed43</a> service</i></sub></p>
+]]></description>
+</item>
+<item>
+<guid isPermaLink="false">15ee3e3d65357f88b033c1167b9e9e6c</guid>
+<pubDate>Wed, 16 Nov 2022 07:10:08 GMT</pubDate>
+<link>https://signalbuild.netlify.app/portfolio-details.html</link>
+<description><![CDATA[<p><sub><i>-- Delivered by <a href="http://feed43.com/">Feed43</a> service</i></sub></p>
+]]></description>
+</item>
+<item>
+<guid isPermaLink="false">3d4c4e7255c6fdec500a10ee88ed4942</guid>
+<pubDate>Wed, 16 Nov 2022 07:10:07 GMT</pubDate>
+<link>https://signalbuild.netlify.app/portfolio-details.html&#37;22&#37;20class=&#37;22iq-portfolio-img</link>
+<description><![CDATA[<p><sub><i>-- Delivered by <a href="http://feed43.com/">Feed43</a> service</i></sub></p>
+]]></description>
+</item>
+<item>
+<guid isPermaLink="false">15ee3e3d65357f88b033c1167b9e9e6c</guid>
+<pubDate>Wed, 16 Nov 2022 07:10:06 GMT</pubDate>
+<link>https://signalbuild.netlify.app/portfolio-details.html</link>
+<description><![CDATA[<p><sub><i>-- Delivered by <a href="http://feed43.com/">Feed43</a> service</i></sub></p>
+]]></description>
+</item>
+<item>
+<guid isPermaLink="false">3d4c4e7255c6fdec500a10ee88ed4942</guid>
+<pubDate>Wed, 16 Nov 2022 07:10:05 GMT</pubDate>
+<link>https://signalbuild.netlify.app/portfolio-details.html&#37;22&#37;20class=&#37;22iq-portfolio-img</link>
+<description><![CDATA[<p><sub><i>-- Delivered by <a href="http://feed43.com/">Feed43</a> service</i></sub></p>
+]]></description>
+</item>
+<item>
+<guid isPermaLink="false">15ee3e3d65357f88b033c1167b9e9e6c</guid>
+<pubDate>Wed, 16 Nov 2022 07:10:04 GMT</pubDate>
+<link>https://signalbuild.netlify.app/portfolio-details.html</link>
+<description><![CDATA[<p><sub><i>-- Delivered by <a href="http://feed43.com/">Feed43</a> service</i></sub></p>
+]]></description>
+</item>
+
+
+  </channel>
+</rss>
